@@ -14,9 +14,17 @@ class Router{
         this.currentPage = page
     }
 
-    assignCallback(callback){
+    assignRedirect(callback){
+        this.assignCallback(callback, 'redirect')
+    }
+
+    assignAlertHandler(callback){
+        this.assignCallback(callback, 'handleAlert')
+    }
+
+    assignCallback(callback, name){
         for(let route in this.routes){
-            this.routes[route].redirect = callback
+            this.routes[route][name] = callback
         }
         if(this.navbar){ this.navbar.redirect = callback }
     }

@@ -26,7 +26,7 @@ class SignupPage extends PageManager{
           this.redirect('profile')
         }
         catch(err){
-          alert(err)
+          this.handleError(err)
         }
 
     }

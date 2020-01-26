@@ -16,13 +16,17 @@ class Navbar extends PageManager{
     handleClick(e){
         if(e.target.tagName === "A"){
             e.preventDefault()
+            if(e.target.id !== 'logout-link'){
             const route = e.target.id.split('-')[0]
             if(route !== this.currentPage()) { this.redirect(route)}
+            }else{
+              this.adapter.token = null
+              this.redirect('welcome')
+            }
         }
     }
 
     get staticHTML(){
-
         if(this.is_authenticated){
             return (`
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,12 +40,9 @@ class Navbar extends PageManager{
       <li class="nav-item active">
         <a class="nav-link" id="profile-link" href="#">Profile <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" id="tasks-link" href="#">Tasks</a>
-      </li>
-      <li class="nav-item">
-      <a class="nav-link" id="tasks2-link" href="#">Tasks2</a>
-    </li>
+    <li class="nav-item">
+    <a class="nav-link" id="logout-link" href="#">Logout </a>
+  </li>
     </ul>
   </div>
 </nav>
